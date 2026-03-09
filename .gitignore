@@ -1,0 +1,65 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+myenv/
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# SQLite database files
+*.sqlite3
+*.db
+
+# PostgreSQL local dump files
+*.sql
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
+
+# pytest cache
+.pytest_cache/
+
+# mypy cache
+.mypy_cache/
+
+# Ruff cache
+.ruff_cache/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# FastAPI specific
+*.pid
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Docker (optional)
+docker-compose.override.yml
+
+# Alembic migrations (optional — remove if you want to track migrations)
+alembic/versions/*.pyc
