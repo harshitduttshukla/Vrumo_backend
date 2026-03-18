@@ -34,7 +34,7 @@ class ServiceCategory(str,Enum):
     bike = "bike"
 
 class ServiceCreate(BaseModel):
-    name :str = Field(...,min_length=255)
+    name :str = Field(...,min_length=3,max_length=255)
     description : Optional[str] = None
     price : float = Field(...,gt=0)
     image_url : Optional[str] = None
