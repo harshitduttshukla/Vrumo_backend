@@ -4,4 +4,5 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 pydantic[email]
-passlib[bcrypt]
+passlib[bcrypt]==1.7.4
+bcrypt==3.2.0

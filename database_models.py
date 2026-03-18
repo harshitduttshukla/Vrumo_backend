@@ -22,3 +22,22 @@ class User(Base):
     password_hash = Column(String(255), nullable=False)
     role = Column(Enum(UserRole), nullable=False, default=UserRole.customer)
     created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), nullable=False)
+
+
+class ServiceCategory(Base):
+    car = "car"
+    bike = "bike"
+
+
+class Service(Base):
+    __tablename__ = "services"
+
+    id = Column(String(36), primary_key=True, default=lambda:str(uuid.uuid4()))
+    name = Column(String(255),nullable=False)
+    description = Column(String(255),nullable=False)
+    price = Column()
+    image_url = Column(DECIMAL(Text,nullable=False))
+    category = Column(Enum(ServiceCategory),nullable=False)
+    created_at = Column(TIMESTAMP,server_default=func.current_timestamp(),nullable=False)
+
+    
