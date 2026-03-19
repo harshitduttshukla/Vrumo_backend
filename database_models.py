@@ -1,6 +1,6 @@
 import uuid
 import enum
-from sqlalchemy import Column, String, Enum, TIMESTAMP, func, Float, Text, Boolean
+from sqlalchemy import Column, String, Enum, TIMESTAMP, func, Float, Text, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -39,6 +39,29 @@ class Service(Base):
     image_url = Column(String(500), nullable=True)
     category = Column(Enum(ServiceCategory), nullable=False)
     is_active = Column(Boolean, default=True)
+    created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), nullable=False)
+
+
+class BookingStatus(str, enum.Enum):
+    pending = "pending"
+    confirmed = "confirmed"
+    completed = "completed"
+    cancelled = "cancelled"
+
+
+class Booking(Base):
+    __tablename__ = "bookings"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String(36), ForeignKey("users.id"), nullable=False)
+    service_id = Column(String(36), ForeignKey("services.id"), nullable=False)
+    vehicle_type = Column(String(50), nullable=False)
+    vehicle_model = Column(String(255), nullable=False)
+    address = Column(Text, nullable=False)
+    booking_date = Column(String(50), nullable=False)
+    time_slot = Column(String(50), nullable=False)
+    total_price = Column(Float, nullable=False)
+    status = Column(Enum(BookingStatus), nullable=False, default=BookingStatus.pending)
     created_at = Column(TIMESTAMP, server_default=func.current_timestamp(), nullable=False)
 
     

@@ -1,7 +1,7 @@
 from fastapi import APIRouter,Depends,HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal
-from Models import User
+from database_models import User
 from schemas import UserCreate, UserResponse
 from utils import hash_password
 
@@ -16,14 +16,18 @@ def get_db():
         db.close()
 
 
-@router.post("/",response_model=UserResponse)
-def create_user(user:UserCreate,db:Session = Depends(get_db)):
-    existing_email = db.query(User).filter(User.email == user.email).first()
-    if existing_email:
-        raise HTTPException(status_code=400,detail="Email already registered")
+@router.post("/", response_model=UserResponse)
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
+    # Check if email exists
+    existing_user = db.query(User).filter(User.email == user.email).first()
+    if existing_user:
+        return existing_user
+
+    # Check if phone exists
     existing_phone = db.query(User).filter(User.phone == user.phone).first()
     if existing_phone:
-        raise HTTPException(status_code=400,detail="Phone number already registered")
+        return existing_phone
+
     hashed_password = hash_password(user.password)
     new_user = User(
         name=user.name,
