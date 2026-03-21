@@ -36,8 +36,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 def root():
     return {"message": "🚀 Vrumo API is running"}
 
-# Include routers
-app.include_router(users.router, prefix="/users", tags=["Users"])
-app.include_router(services.router, prefix="/services", tags=["Services"])
-app.include_router(bookings.router, prefix="/bookings", tags=["Bookings"])
+# Include routers with /api prefix
+app.include_router(users.router, prefix="/api/users", tags=["Users"])
+app.include_router(services.router, prefix="/api/services", tags=["Services"])
+app.include_router(bookings.router, prefix="/api/bookings", tags=["Bookings"])
 

@@ -67,6 +67,17 @@ class BookingCreate(BaseModel):
     time_slot: str
 
 
+class BookingFlatCreate(BaseModel):
+    name: str
+    email: str
+    phone: str
+    vehicleType: str
+    serviceType: str
+    date: str
+    time: str
+    address: str
+
+
 class BookingResponse(BaseModel):
     id: str
     user_id: str
