@@ -31,3 +31,11 @@ try:
         print("Database connected successfully")
 except Exception as e:
     print("Database connection failed:", e)
+
+# Dependency to get session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

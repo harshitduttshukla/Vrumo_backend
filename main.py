@@ -5,7 +5,8 @@ from fastapi.responses import JSONResponse
 from database import engine
 from database_models import Base
 
-from routers import users, services, bookings
+from routers import services, bookings, admin, workers
+from app.modules.auth import auth_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -37,7 +38,9 @@ def root():
     return {"message": "🚀 Vrumo API is running"}
 
 # Include routers with /api prefix
-app.include_router(users.router, prefix="/api/users", tags=["Users"])
 app.include_router(services.router, prefix="/api/services", tags=["Services"])
 app.include_router(bookings.router, prefix="/api/bookings", tags=["Bookings"])
+app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
+app.include_router(workers.router, prefix="/api/workers", tags=["Workers"])
+app.include_router(auth_router.router, prefix="/auth", tags=["Authentication"])
 

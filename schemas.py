@@ -6,6 +6,7 @@ from datetime import datetime, date
 
 class UserRole(str, Enum):
     customer = "customer"
+    worker = "worker"
     admin = "admin"
 
 
@@ -23,6 +24,8 @@ class UserResponse(BaseModel):
     email: str
     phone: str
     role: UserRole
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
     created_at: datetime
 
     class Config:
@@ -78,6 +81,16 @@ class BookingFlatCreate(BaseModel):
     address: str
 
 
+class BookingAuthCreate(BaseModel):
+    serviceType: str
+    vehicleType: str
+    date: str
+    time: str
+    address: str
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+
+
 class BookingResponse(BaseModel):
     id: str
     user_id: str
@@ -87,6 +100,8 @@ class BookingResponse(BaseModel):
     address: str
     booking_date: Union[str, date]
     time_slot: str
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
     total_price: float
     status: str
     created_at: datetime

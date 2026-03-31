@@ -56,6 +56,13 @@ uvicorn main:app --reload
 ```
 The API will be available at `http://127.0.0.1:8000`.
 
+### 📱 For Mobile Development
+To access the API from a physical mobile device, you must allow connections from all network interfaces:
+```bash
+uvicorn main:app --reload --host 0.0.0.0
+```
+Then, use your computer's local IP address (e.g., `http://10.22.50.160:8000`) in the mobile app's configuration.
+
 ## 📖 API Documentation
 Once the server is running, you can access the interactive API docs:
 - **Swagger UI**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
